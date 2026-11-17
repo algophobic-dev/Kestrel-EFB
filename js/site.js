@@ -5,12 +5,6 @@ const $ = (s, el = document) => el.querySelector(s), $$ = (s, el = document) => 
 const seen = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); seen.unobserve(e.target); } }), { rootMargin: '0px 0px -8% 0px' });
 $$('[data-rise], .stage').forEach(el => seen.observe(el));
 
-// Feature switches
-$$('.switch').forEach(sw => sw.addEventListener('click', () => {
-  const on = sw.getAttribute('aria-checked') !== 'true';
-  sw.setAttribute('aria-checked', on); sw.closest('.band').classList.toggle('on', on);
-}));
-
 // Stages slider
 const range = $('#stage-range');
 if (range) {
@@ -29,37 +23,23 @@ if (range) {
   show(0, true);
 }
 
-// Type a route: live weather and distance from the National Weather Service.
-const input = $('#route');
-if (input) {
-  const out = $('#answer'), cache = new Map();
+// Weather for a flight: distance and current weather for two airports, worldwide, from aviationweather.gov through the app's relay.
+const form = $('#route-form');
+if (form) {
+  const RELAY = 'https://kestrel-relay.kestrelefb.workers.dev';
+  const from = $('#from'), to = $('#to'), out = $('#answer');
   const CAT = { VFR: 'var(--vfr)', MVFR: 'var(--mvfr)', IFR: 'var(--ifr)', LIFR: 'var(--lifr)' };
   const el = (tag, cls, text) => { const e = document.createElement(tag); if (cls) e.className = cls; if (text != null) e.textContent = text; return e; };
-  const nws = async path => { const r = await fetch('https://api.weather.gov' + path, { headers: { Accept: 'application/geo+json' } }); if (!r.ok) throw new Error(r.status); return r.json(); };
-  const station = id => {
-    if (!cache.has(id)) cache.set(id, Promise.all([nws(`/stations/${id}`), nws(`/stations/${id}/observations/latest`).catch(() => null)])
-      .then(([s, o]) => ({ id, name: s.properties.name, lon: s.geometry.coordinates[0], lat: s.geometry.coordinates[1], obs: o?.properties })).catch(() => null));
-    return cache.get(id);
-  };
-  function category(o) {
-    const vis = o.visibility?.value != null ? o.visibility.value / 1609.34 : null;
-    const ceil = Math.min(...(o.cloudLayers || []).filter(c => ['BKN', 'OVC', 'VV'].includes(c.amount) && c.base?.value != null).map(c => c.base.value * 3.28084), Infinity);
-    if (vis == null && ceil === Infinity) return null;
-    const v = vis ?? 99;
-    return ceil < 500 || v < 1 ? 'LIFR' : ceil < 1000 || v < 3 ? 'IFR' : ceil <= 3000 || v <= 5 ? 'MVFR' : 'VFR';
-  }
-  function card(s) {
-    const c = el('div', 'stn'), o = s.obs, head = el('div', 'id'); head.append(el('span', '', s.id));
-    const cat = o && category(o); if (cat) { const b = el('span', 'cat', cat); b.style.background = CAT[cat]; head.append(b); }
-    c.append(head, el('div', 'name', s.name));
-    if (!o) { c.append(el('div', 'raw', 'No current report from this station.')); return c; }
+  function card(m) {
+    const c = el('div', 'stn'), head = el('div', 'id'); head.append(el('span', '', m.icaoId));
+    if (CAT[m.fltCat]) { const b = el('span', 'cat', m.fltCat); b.style.background = CAT[m.fltCat]; head.append(b); }
+    c.append(head, el('div', 'name', (m.name || '').replace(/, [A-Z]{2}, [A-Z]{2}$|, [A-Z]{2}$/, '')));
     const dl = el('dl'), row = (k, v) => { if (v != null) dl.append(el('dt', '', k), el('dd', '', v)); };
-    const kt = o.windSpeed?.value != null ? Math.round(o.windSpeed.value / 1.852) : null;
-    row('Wind', kt == null ? null : kt === 0 ? 'Calm' : `${String(Math.round(o.windDirection?.value ?? 0)).padStart(3, '0')}° at ${kt} kt`);
-    row('Visibility', o.visibility?.value != null ? `${Math.min(10, +(o.visibility.value / 1609.34).toFixed(1))} sm` : null);
-    row('Temperature', o.temperature?.value != null ? `${Math.round(o.temperature.value)}°C` : null);
-    row('Altimeter', o.barometricPressure?.value != null ? `${(o.barometricPressure.value / 3386.39).toFixed(2)} inHg` : null);
-    c.append(dl); if (o.rawMessage) c.append(el('div', 'raw', o.rawMessage));
+    row('Wind', m.wspd == null ? null : m.wspd === 0 ? 'Calm' : `${m.wdir === 'VRB' ? 'Variable' : String(m.wdir).padStart(3, '0') + '°'} at ${m.wspd} kt${m.wgst ? `, gusts ${m.wgst}` : ''}`);
+    row('Visibility', m.visib == null ? null : typeof m.visib === 'number' ? `${m.visib >= 3 ? Math.round(m.visib) : +m.visib.toFixed(1)} sm` : `${m.visib} sm`);
+    row('Temperature', m.temp != null ? `${Math.round(m.temp)}°C` : null);
+    row('Altimeter', m.altim != null ? `${(m.altim / 33.8639).toFixed(2)} inHg · ${Math.round(m.altim)} hPa` : null);
+    c.append(dl); if (m.rawOb) c.append(el('div', 'raw', m.rawOb.replace(/^(METAR|SPECI) /, '')));
     return c;
   }
   const rad = d => d * Math.PI / 180;
@@ -68,24 +48,29 @@ if (input) {
     const nm = 2 * 3440.065 * Math.asin(Math.sqrt(x));
     const brg = (Math.atan2(Math.sin(dLon) * Math.cos(rad(b.lat)), Math.cos(rad(a.lat)) * Math.sin(rad(b.lat)) - Math.sin(rad(a.lat)) * Math.cos(rad(b.lat)) * Math.cos(dLon)) * 180 / Math.PI + 360) % 360;
     const min = Math.round(nm / 110 * 60), d = el('div', 'leg');
-    d.append(el('div', 'big', `${Math.round(nm).toLocaleString()} nm`), el('div', 'soft', `${a.id} to ${b.id}, direct. Course ${String(Math.round(brg)).padStart(3, '0')}° true. About ${Math.floor(min / 60)} h ${String(min % 60).padStart(2, '0')} min at 110 knots.`));
+    d.append(el('div', 'big', `${Math.round(nm).toLocaleString()} nm`), el('div', 'soft', `${a.icaoId} to ${b.icaoId}, direct. Course ${String(Math.round(brg)).padStart(3, '0')}° true. About ${Math.floor(min / 60)} h ${String(min % 60).padStart(2, '0')} min at 110 knots.`));
     return d;
   }
-  let run = 0, timer;
+  let run = 0;
   async function update() {
-    const ids = [...new Set(input.value.toUpperCase().match(/\b[A-Z][A-Z0-9]{3}\b/g) || [])].slice(0, 2), mine = ++run;
-    if (!ids.length) { out.replaceChildren(el('p', 'soft', 'Enter one or two US airport identifiers, such as KBJC KASE.')); return; }
-    out.setAttribute('aria-busy', 'true');
-    const got = await Promise.all(ids.map(station)); if (mine !== run) return;
+    const ids = [from.value, to.value].map(v => v.trim().toUpperCase()).filter(Boolean), mine = ++run;
+    if (!ids.length) { out.replaceChildren(el('p', 'soft', 'Enter an airport code in From and To, then select Show weather.')); return; }
+    const bad = ids.filter(id => !/^[A-Z0-9]{4}$/.test(id));
+    if (bad.length) { out.replaceChildren(el('p', 'soft', `${bad.join(' and ')}: use a four-letter ICAO code, such as KDEN or EGLL.`)); return; }
+    out.replaceChildren(el('p', 'soft', 'Loading weather.')); out.setAttribute('aria-busy', 'true');
+    let list = [];
+    try { const r = await fetch(`${RELAY}/metar?ids=${[...new Set(ids)].join(',')}`); if (!r.ok) throw 0; list = await r.json(); }
+    catch { if (mine === run) { out.removeAttribute('aria-busy'); out.replaceChildren(el('p', 'soft', 'Weather did not load. Check your connection and try again.')); } return; }
+    if (mine !== run) return;
     out.removeAttribute('aria-busy');
-    const ok = got.filter(Boolean), missing = ids.filter((id, i) => !got[i]), kids = [];
-    if (ok.length === 2) kids.push(leg(ok[0], ok[1]));
-    ok.forEach(s => kids.push(card(s)));
-    if (missing.length) kids.push(el('p', 'soft', `No weather station found for ${missing.join(' or ')}. Use a four-letter identifier that starts with K, such as KDEN.`));
+    const got = ids.map(id => list.find(m => m.icaoId === id)), kids = [];
+    if (got[0] && got[1] && ids[0] !== ids[1]) kids.push(leg(got[0], got[1]));
+    got.forEach(m => m && kids.push(card(m)));
+    const missing = ids.filter((id, i) => !got[i]);
+    if (missing.length) kids.push(el('p', 'soft', `No current weather report for ${missing.join(' or ')}. Check the code, or try a larger airport nearby.`));
     out.replaceChildren(...kids);
   }
-  input.addEventListener('input', () => { clearTimeout(timer); timer = setTimeout(update, 450); });
-  $$('.examples button').forEach(b => b.addEventListener('click', () => { input.value = b.textContent; update(); input.focus(); }));
-  $('#route-form').addEventListener('submit', e => { e.preventDefault(); update(); });
+  form.addEventListener('submit', e => { e.preventDefault(); update(); });
+  $$('.examples button').forEach(b => b.addEventListener('click', () => { [from.value, to.value] = b.textContent.split(' '); update(); }));
   update();
 }

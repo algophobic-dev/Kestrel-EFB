@@ -21,66 +21,48 @@
 </header>
 <main>
 <section class="hero wrap">
-  <div class="grid">
-    <div class="copy">
-      <h1 data-rise>Free flight planning for pilots</h1>
-      <p data-rise style="--i:1">Kestrel EFB puts FAA charts, weather, routes and approach plates in one app for Mac, Windows, iPad and iPhone.</p>
-      <div class="acts" data-rise style="--i:2">
-        <a class="btn" href="https://algophobic-dev.github.io/Kestrel-EFB-App/">Open the app</a>
-        <a class="link" href="download.html">Download for Mac or Windows</a>
-      </div>
+  <div class="copy">
+    <h1 data-rise>Free flight planning for pilots</h1>
+    <p data-rise style="--i:1">Kestrel EFB puts charts, weather, routes and approach plates in one app for Mac, Windows, iPad and iPhone. Airports and weather cover the whole world.</p>
+    <div class="acts" data-rise style="--i:2">
+      <a class="btn" href="https://algophobic-dev.github.io/Kestrel-EFB-App/">Open the app</a>
+      <a class="link" href="download.html">Download for Mac or Windows</a>
     </div>
   </div>
-  <div class="hero-spacer"></div>
-  <div class="stage">
-    <div class="shot" data-ui><img src="img/map-route.jpg" width="1920" height="1200" alt="Kestrel EFB showing a route from Rocky Mountain Metropolitan to Aspen on an FAA sectional chart, with distance, time and fuel above the map"></div>
-  </div>
+  <div class="shot" data-rise style="--i:3"><img src="img/map-route.jpg" width="1920" height="1200" alt="Kestrel EFB showing a route from Rocky Mountain Metropolitan to Aspen on an FAA sectional chart, with distance, time and fuel above the map"></div>
 </section>
 
-<section aria-labelledby="shows">
-  <div class="wrap grid head2">
-    <h2 id="shows" data-rise style="grid-column: 1 / span 8">Switch on what you fly with</h2>
-    <p class="soft" data-rise style="--i:1; grid-column: 9 / -1; align-self: end">Each layer in the app is one switch. Try them here.</p>
+<section class="wrap" aria-labelledby="inside">
+  <h2 id="inside" data-rise>What's in the app</h2>
+  <div class="grid feats">
+    <div class="feat" data-rise><h3>Charts</h3><p class="soft">FAA VFR sectional, terminal, IFR low and IFR high charts, and VFR charts for much of Europe.</p></div>
+    <div class="feat" data-rise style="--i:1"><h3>Weather</h3><p class="soft">METAR, TAF, animated radar, flight category dots and SIGMETs, in the US and worldwide.</p></div>
+    <div class="feat" data-rise style="--i:2"><h3>Routes</h3><p class="soft">Type a route with airways, SIDs and STARs. Get a NavLog with winds aloft, time and fuel.</p></div>
+    <div class="feat" data-rise><h3>Airports</h3><p class="soft">About 57,000 airports with runways, crosswind, frequencies and current weather.</p></div>
+    <div class="feat" data-rise style="--i:1"><h3>Plates</h3><p class="soft">Current FAA approach plates and airport diagrams for US airports, placed on the map.</p></div>
+    <div class="feat" data-rise style="--i:2"><h3>Terrain</h3><p class="soft">Terrain near your altitude turns yellow, then red. Fly the route in 3D before you go.</p></div>
   </div>
-  <div class="bands">
-    <div class="band on" style="--fill: var(--band-1)" data-rise>
-      <div><h3>Show FAA charts on the map.</h3><p><span>VFR sectional, VFR terminal, IFR low and IFR high charts, straight from the FAA and updated every cycle.</span></p></div>
-      <button class="switch" role="switch" aria-checked="true" aria-label="Show FAA charts on the map"></button>
-    </div>
-    <div class="band" style="--fill: var(--band-2)" data-rise>
-      <div><h3>Show radar and flight categories.</h3><p><span>Animated radar, a VFR to LIFR dot on every reporting airport, SIGMETs, and icing, turbulence and IFR advisories.</span></p></div>
-      <button class="switch" role="switch" aria-checked="false" aria-label="Show radar and flight categories"></button>
-    </div>
-    <div class="band on" style="--fill: var(--band-5)" data-rise>
-      <div><h3>Warn me about terrain and obstacles.</h3><p><span>Terrain within 1,000 ft of your altitude turns yellow. Within 100 ft it turns red. Obstacles and airspace show in the route profile.</span></p></div>
-      <button class="switch" role="switch" aria-checked="true" aria-label="Warn me about terrain and obstacles"></button>
-    </div>
-    <div class="band" style="--fill: var(--band-3)" data-rise>
-      <div><h3>Place approach plates on the map.</h3><p><span>Current FAA plates for every US airport that has them. Approach plates sit on the map at their true position.</span></p></div>
-      <button class="switch" role="switch" aria-checked="false" aria-label="Place approach plates on the map"></button>
-    </div>
-    <div class="band" style="--fill: var(--band-4)" data-rise>
-      <div><h3>Keep my flights on every device.</h3><p><span>Sign in with a username and password. Aircraft, flights, logbook and checklists sync. No email needed.</span></p></div>
-      <button class="switch" role="switch" aria-checked="false" aria-label="Keep my flights on every device"></button>
-    </div>
-  </div>
+  <p class="more" data-rise><a class="link" href="features.html">See every feature</a></p>
 </section>
 
-<section class="type-route" aria-labelledby="try">
+<section class="check" aria-labelledby="try">
   <div class="wrap">
-    <h2 id="try" data-rise><label for="route">Type a route</label></h2>
-    <form id="route-form" data-ui>
-      <input id="route" name="route" type="text" value="KBJC KASE" maxlength="24" autocomplete="off" autocapitalize="characters" spellcheck="false" aria-describedby="route-hint">
+    <h2 id="try" data-rise>Check the weather for a flight</h2>
+    <p class="soft lead2" data-rise style="--i:1">Enter the airport you leave from and the one you fly to. You get the distance and each airport's current weather.</p>
+    <form id="route-form" class="route-form" data-rise style="--i:2">
+      <label><span>From</span><input id="from" name="from" type="text" value="KBJC" placeholder="e.g. KBJC" maxlength="4" autocomplete="off" autocapitalize="characters" spellcheck="false"></label>
+      <label><span>To</span><input id="to" name="to" type="text" value="KASE" placeholder="e.g. KASE" maxlength="4" autocomplete="off" autocapitalize="characters" spellcheck="false"></label>
+      <button class="btn" type="submit">Show weather</button>
     </form>
-    <p id="route-hint" class="soft hint">Live weather and distance for two US airports, from the National Weather Service.</p>
+    <div class="examples">
+      <span class="soft">Examples:</span>
+      <button class="btn quiet sm" type="button">KSEA KPDX</button>
+      <button class="btn quiet sm" type="button">EGLL LFPG</button>
+      <button class="btn quiet sm" type="button">KLEX KCVG</button>
+    </div>
+    <p class="soft small hint">Use four-letter ICAO codes, such as KJFK or EGLL. Weather from aviationweather.gov.</p>
     <div id="answer" class="answer" aria-live="polite">
       <noscript><p class="soft">Turn on JavaScript to see live weather here, or <a class="link" href="https://algophobic-dev.github.io/Kestrel-EFB-App/">open the app</a>.</p></noscript>
-    </div>
-    <div class="examples">
-      <span class="soft">Or try</span>
-      <button class="btn quiet sm" type="button">KSEA KPDX</button>
-      <button class="btn quiet sm" type="button">KJFK KBOS</button>
-      <button class="btn quiet sm" type="button">KLEX KCVG</button>
     </div>
   </div>
 </section>
