@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Kestrel EFB · Free flight planning for US pilots</title>
+<meta name="description" content="Kestrel EFB is a free flight planning app for US pilots, with FAA charts, weather, routes, approach plates and a 3D terrain view. For Mac, Windows, iPad and iPhone.">
+<meta name="theme-color" content="#10161a">
+<meta property="og:title" content="Kestrel EFB · Free flight planning for US pilots">
+<meta property="og:description" content="Kestrel EFB is a free flight planning app for US pilots, with FAA charts, weather, routes, approach plates and a 3D terrain view. For Mac, Windows, iPad and iPhone.">
+<meta property="og:image" content="img/map-route.jpg">
+<link rel="icon" href="img/icon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="img/icon-180.png">
+<link rel="stylesheet" href="css/site.css">
+<script>document.documentElement.classList.add('js')</script>
+</head>
+<body>
+<header class="nav">
+  <a class="mark" href="./"><img src="img/icon-180.png" width="28" height="28" alt="">Kestrel EFB</a>
+  <nav aria-label="Main"><ul><li><a href="features.html">Features</a></li><li class=opt2><a href="download.html">Download</a></li><li class=opt><a href="about.html">About</a></li><li><a class="btn sm" href="https://algophobic-dev.github.io/Kestrel-EFB-App/">Open the app</a></li></ul></nav>
+</header>
+<main>
+<section class="hero wrap">
+  <div class="grid">
+    <div class="copy">
+      <h1 data-rise>Free flight planning for US pilots</h1>
+      <p data-rise style="--i:1">Kestrel EFB puts FAA charts, weather, routes and approach plates in one app for Mac, Windows, iPad and iPhone.</p>
+      <div class="acts" data-rise style="--i:2">
+        <a class="btn" href="https://algophobic-dev.github.io/Kestrel-EFB-App/">Open the app</a>
+        <a class="link" href="download.html">Download for Mac or Windows</a>
+      </div>
+    </div>
+  </div>
+  <div class="hero-spacer"></div>
+  <div class="stage">
+    <div class="shot" data-ui><img src="img/map-route.jpg" width="1920" height="1200" alt="Kestrel EFB showing a route from Rocky Mountain Metropolitan to Aspen on an FAA sectional chart, with distance, time and fuel above the map"></div>
+  </div>
+</section>
+
+<section aria-labelledby="shows">
+  <div class="wrap grid head2">
+    <h2 id="shows" data-rise style="grid-column: 1 / span 8">Switch on what you fly with</h2>
+    <p class="soft" data-rise style="--i:1; grid-column: 9 / -1; align-self: end">Each layer in the app is one switch. Try them here.</p>
+  </div>
+  <div class="bands">
+    <div class="band on" style="--fill: var(--band-1)" data-rise>
+      <div><h3>Show FAA charts on the map.</h3><p><span>VFR sectional, VFR terminal, IFR low and IFR high charts, straight from the FAA and updated every cycle.</span></p></div>
+      <button class="switch" role="switch" aria-checked="true" aria-label="Show FAA charts on the map"></button>
+    </div>
+    <div class="band" style="--fill: var(--band-2)" data-rise>
+      <div><h3>Show radar and flight categories.</h3><p><span>Animated radar, a VFR to LIFR dot on every reporting airport, SIGMETs, and icing, turbulence and IFR advisories.</span></p></div>
+      <button class="switch" role="switch" aria-checked="false" aria-label="Show radar and flight categories"></button>
+    </div>
+    <div class="band on" style="--fill: var(--band-5)" data-rise>
+      <div><h3>Warn me about terrain and obstacles.</h3><p><span>Terrain within 1,000 ft of your altitude turns yellow. Within 100 ft it turns red. Obstacles and airspace show in the route profile.</span></p></div>
+      <button class="switch" role="switch" aria-checked="true" aria-label="Warn me about terrain and obstacles"></button>
+    </div>
+    <div class="band" style="--fill: var(--band-3)" data-rise>
+      <div><h3>Place approach plates on the map.</h3><p><span>Current FAA plates for every US airport that has them. Approach plates sit on the map at their true position.</span></p></div>
+      <button class="switch" role="switch" aria-checked="false" aria-label="Place approach plates on the map"></button>
+    </div>
+    <div class="band" style="--fill: var(--band-4)" data-rise>
+      <div><h3>Keep my flights on every device.</h3><p><span>Sign in with a username and password. Aircraft, flights, logbook and checklists sync. No email needed.</span></p></div>
+      <button class="switch" role="switch" aria-checked="false" aria-label="Keep my flights on every device"></button>
+    </div>
+  </div>
+</section>
+
+<section class="type-route" aria-labelledby="try">
+  <div class="wrap">
+    <h2 id="try" data-rise><label for="route">Type a route</label></h2>
+    <form id="route-form" data-ui>
+      <input id="route" name="route" type="text" value="KBJC KASE" maxlength="24" autocomplete="off" autocapitalize="characters" spellcheck="false" aria-describedby="route-hint">
+    </form>
+    <p id="route-hint" class="soft hint">Live weather and distance for two US airports, from the National Weather Service.</p>
+    <div id="answer" class="answer" aria-live="polite">
+      <noscript><p class="soft">Turn on JavaScript to see live weather here, or <a class="link" href="https://algophobic-dev.github.io/Kestrel-EFB-App/">open the app</a>.</p></noscript>
+    </div>
+    <div class="examples">
+      <span class="soft">Or try</span>
+      <button class="btn quiet sm" type="button">KSEA KPDX</button>
+      <button class="btn quiet sm" type="button">KJFK KBOS</button>
+      <button class="btn quiet sm" type="button">KLEX KCVG</button>
+    </div>
+  </div>
+</section>
+
+<section class="stages" aria-label="How a flight goes">
+  <div class="inner">
+    <div class="split">
+      <div class="say">
+        <h2 id="stage-h" class="fade">First, plan the route</h2>
+        <p id="stage-p" class="fade">Enter airports, airways, a SID or a STAR. The app works out distance, time, fuel and wind.</p>
+      </div>
+      <div class="see">
+        <div class="frame" data-ui>
+          <img class="on" src="img/map-route.jpg" width="1920" height="1200" alt="Route drawn on a sectional chart with the flight plan panel open" loading="lazy">
+          <img src="img/airport.jpg" width="1920" height="1200" alt="Airport page for Aspen with METAR, TAF, runways and frequencies" loading="lazy">
+          <img src="img/plate.jpg" width="1920" height="1200" alt="The RNAV (GPS)-F approach plate for Aspen" loading="lazy">
+          <img src="img/view3d.jpg" width="1920" height="1200" alt="3D terrain view along the route toward Aspen at 14,500 ft" loading="lazy">
+        </div>
+      </div>
+    </div>
+    <div class="control">
+      <div class="track"><i></i><input id="stage-range" type="range" min="0" max="3" step="1" value="0" aria-label="Stage of the flight"></div>
+      <div class="names"><button type="button">Plan</button><button type="button">Weather</button><button type="button">Plates</button><button type="button">Terrain</button></div>
+    </div>
+  </div>
+  <div id="stage-data" hidden>
+    <div data-name="Plan" data-fill="--band-2" data-h="First, plan the route" data-p="Enter airports, airways, a SID or a STAR. The app works out distance, time, fuel and wind."></div>
+    <div data-name="Weather" data-fill="--band-1" data-h="Then check the weather" data-p="METAR, TAF and D-ATIS for each airport, with headwind and crosswind for every runway."></div>
+    <div data-name="Plates" data-fill="--band-3" data-h="Next, read the plates" data-p="Open any current FAA plate. Save an airport's plates to read them offline."></div>
+    <div data-name="Terrain" data-fill="--band-5" data-h="Last, see the terrain" data-p="Fly the route in 3D before you go. Terrain near your altitude turns yellow, then red."></div>
+  </div>
+</section>
+
+<section aria-labelledby="open" style="overflow: hidden">
+  <div class="tiles">
+    <div class="tile photo drift" data-rise><img src="assets/american-kestrel.jpg" width="1024" height="683" alt="An American kestrel perched on a bare branch against a blue sky" loading="lazy"></div>
+    <div class="tile act" data-rise style="--i:1">
+      <h2 id="open">Open Kestrel EFB now</h2>
+      <p>It runs in your browser with nothing to install. It is free, and you need no account to use it.</p>
+      <div class="acts">
+        <a class="btn dark" href="https://algophobic-dev.github.io/Kestrel-EFB-App/">Open the app</a>
+        <a class="link" href="download.html">Get it for Mac, Windows, iPad or iPhone</a>
+      </div>
+    </div>
+    <div class="tile photo" data-rise style="--i:2"><img src="img/profile.jpg" width="1920" height="1200" alt="Terrain profile of the route to Aspen" loading="lazy" style="object-position: 30% 22%"></div>
+  </div>
+</section>
+
+</main>
+<footer>
+  <div>Kestrel EFB. Free flight planning.</div>
+  <nav aria-label="Footer"><a href="features.html">Features</a><a href="download.html">Download</a><a href="about.html">About</a><a href="https://github.com/algophobic-dev/Kestrel-EFB-App">GitHub</a></nav>
+  <div class="end">2026. Provided as is, with no warranty.</div>
+</footer>
+<p class="credit">Photograph: "American Kestrel" by USFWS Mountain Prairie, <a href="https://creativecommons.org/licenses/by/2.0/">CC BY 2.0</a>, via <a href="https://www.flickr.com/photos/51986662@N05/15290757126">Flickr</a>. Charts and plates: FAA.</p>
+<script type="module" src="js/site.js"></script>
+<script>
+// This address used to hold the app. Remove its old offline worker so visitors get this site.
+if ('serviceWorker' in navigator) navigator.serviceWorker.getRegistrations().then(rs => rs.forEach(r => { if (new URL(r.scope).pathname === new URL('./', location.href).pathname) r.unregister(); }));
+</script>
+</body>
+</html>
