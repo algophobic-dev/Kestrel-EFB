@@ -1,6 +1,6 @@
 # Kestrel EFB website
 
-The website for [Kestrel EFB](https://github.com/algophobic-dev/Kestrel-EFB-App), a free flight planning app for US pilots.
+The website for [Kestrel EFB](https://github.com/algophobic-dev/Kestrel-EFB-App), a free flight planning app for pilots.
 
 - Website: https://algophobic-dev.github.io/Kestrel-EFB/
 - App: https://algophobic-dev.github.io/Kestrel-EFB-App/

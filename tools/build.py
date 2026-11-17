@@ -10,7 +10,7 @@ DMG = REPO + "/releases/latest/download/Kestrel-EFB.dmg"
 EXE = REPO + "/releases/latest/download/Kestrel-EFB.exe"
 
 PAGES = {
-    "index": ("Kestrel EFB · Free flight planning for US pilots", "Kestrel EFB is a free flight planning app for US pilots, with FAA charts, weather, routes, approach plates and a 3D terrain view. For Mac, Windows, iPad and iPhone."),
+    "index": ("Kestrel EFB · Free flight planning for pilots", "Kestrel EFB is a free flight planning app for pilots, with airports and weather worldwide, FAA charts, routes, approach plates and a 3D terrain view. For Mac, Windows, iPad and iPhone."),
     "features": ("Features · Kestrel EFB", "What Kestrel EFB does: FAA charts, weather, flight plans with airways and procedures, plates on the map, weight and balance, logbook, checklists and sync."),
     "download": ("Download · Kestrel EFB", "Get Kestrel EFB for Mac, Windows, iPad and iPhone, or open it in your browser. Free."),
     "about": ("About · Kestrel EFB", "About Kestrel EFB: why it is free, where its data comes from, and what it keeps on your device."),
