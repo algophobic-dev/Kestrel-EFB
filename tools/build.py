@@ -4,7 +4,8 @@ The output (index.html, features.html, download.html, about.html) is plain HTML 
 import pathlib
 
 ROOT = pathlib.Path(__file__).resolve().parent.parent
-APP = "https://algophobic-dev.github.io/Kestrel-EFB-App/"
+APP = "https://app.efb.kestrelaviation.tech/"
+COMPANY = "https://kestrelaviation.tech"
 REPO = "https://github.com/algophobic-dev/Kestrel-EFB-App"
 DMG = REPO + "/releases/latest/download/Kestrel-EFB.dmg"
 EXE = REPO + "/releases/latest/download/Kestrel-EFB.exe"
@@ -42,14 +43,14 @@ def page(name):
 </head>
 <body>
 <header class="nav">
-  <a class="mark" href="./"><img src="img/icon-180.png" width="28" height="28" alt="">Kestrel EFB</a>
+  <div class="brand"><a class="mark" href="./"><img src="img/icon-180.png" width="28" height="28" alt="">Kestrel EFB</a><a class="by-top" href="{COMPANY}">by Kestrel Aviation Solutions</a></div>
   <nav aria-label="Main"><ul>{links}<li><a class="btn sm" href="{APP}">Open the app</a></li></ul></nav>
 </header>
 <main>
 {body}
 </main>
 <footer>
-  <div>Kestrel EFB. Free flight planning.</div>
+  <div>Kestrel EFB, by <a class="by" href="{COMPANY}">Kestrel Aviation Solutions</a></div>
   <nav aria-label="Footer"><a href="features.html">Features</a><a href="download.html">Download</a><a href="about.html">About</a><a href="{REPO}">GitHub</a></nav>
   <div class="end">2026. Provided as is, with no warranty.</div>
 </footer>

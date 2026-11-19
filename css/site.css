@@ -34,6 +34,10 @@ section { margin-top: var(--gap); }
 .nav { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 24px var(--m); font-size: var(--small); }
 .nav .mark { display: flex; align-items: center; gap: 10px; white-space: nowrap; font-weight: 700; font-size: 18px; text-decoration: none; letter-spacing: -.01em; }
 .nav .mark img { width: 28px; height: 28px; border-radius: 6px; }
+.brand { display: flex; align-items: baseline; gap: 12px; min-width: 0; }
+.by-top { font-size: 13px; color: var(--soft); text-decoration: none; white-space: nowrap; }
+.by-top:hover, footer .by:hover { color: var(--accent); }
+footer .by { color: var(--ink); text-underline-offset: 3px; text-decoration-color: var(--accent); }
 .nav ul { display: flex; align-items: center; gap: clamp(14px, 2.2vw, 30px); list-style: none; margin: 0; padding: 0; }
 .nav a { text-decoration: none; }
 .nav ul a:not(.btn) { padding: 10px 0; }
@@ -200,6 +204,7 @@ footer .end { text-align: right; }
   :root { --display: 10vw; --h2: 8.4vw; --statement: 21px; --body: 17px; }
   .nav { padding-block: 16px; }
   .nav ul li.opt, .nav ul li.opt2 { display: none; }
+  .by-top { display: none; }
   .head2 > * { grid-column: 1 / -1 !important; }
   .head2 p { margin-top: 12px; }
   .stages .see .frame { aspect-ratio: 4 / 3; }

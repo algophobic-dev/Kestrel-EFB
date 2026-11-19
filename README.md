@@ -2,8 +2,9 @@
 
 The website for [Kestrel EFB](https://github.com/algophobic-dev/Kestrel-EFB-App), a free flight planning app for pilots.
 
-- Website: https://algophobic-dev.github.io/Kestrel-EFB/
-- App: https://algophobic-dev.github.io/Kestrel-EFB-App/
+- Website: https://efb.kestrelaviation.tech
+- App: https://app.efb.kestrelaviation.tech
+- Company: https://kestrelaviation.tech
 
 ## Put it on GitHub Pages
 
@@ -22,12 +23,11 @@ python3 tools/build.py
 
 This writes `index.html`, `features.html`, `download.html` and `about.html`. Styles are in `css/site.css` and page behaviour is in `js/site.js`.
 
-## Use a custom domain
+## Custom domain
 
-1. In **Settings > Pages**, enter the domain under Custom domain.
-2. Add the domain to `ALLOWED_ORIGINS` in the app repository's `server/wrangler.toml`, then run `npx wrangler deploy` from `server/`. This is only needed if the app is also served from the new domain.
+The site is served at efb.kestrelaviation.tech. `CNAME` holds that name. In **Settings > Pages**, the custom domain must match it, with Enforce HTTPS on.
 
-All links between pages are relative, so nothing else changes.
+The company site is at kestrelaviation.tech and the app at app.efb.kestrelaviation.tech. Links to the app use the `APP` address in `tools/build.py`.
 
 ## Credits
 
