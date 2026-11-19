@@ -56,6 +56,7 @@ def page(name):
   <div class="end">2026. Provided as is, with no warranty.</div>
 </footer>
 {credit}
+<script src="js/bg.js" data-mode="plane" defer></script>
 <script type="module" src="js/site.js"></script>
 <script>
 // This address used to hold the app. Remove its old offline worker so visitors get this site.
